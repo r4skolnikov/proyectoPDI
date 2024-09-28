@@ -1,147 +1,159 @@
 
-# Handwriting Recognition and Text-to-Speech Project
+# Proyecto de Reconocimiento de Escritura a Mano y Conversión a Voz
 
-This project aims to recognize handwritten text using neural networks and convert the recognized text into speech. The system captures handwriting in real-time using a webcam, processes the images, recognizes the text, and then converts the text to speech.
+Este proyecto tiene como objetivo capturar texto escrito a mano en tiempo real, reconocerlo utilizando redes neuronales (Tesseract OCR) y convertir el texto reconocido en voz. El sistema captura la escritura a mano a través de una cámara web, procesa las imágenes para reconocer el texto y lo convierte en palabras habladas utilizando pyttsx3.
 
-## Features
-- Real-time handwriting capture via webcam.
-- Preprocessing of captured images to improve recognition accuracy.
-- Handwriting recognition using a deep neural network (DNN).
-- Conversion of recognized text to speech using text-to-speech (TTS) technology.
+## Características
+- Captura de imágenes en tiempo real desde una cámara web.
+- Preprocesamiento de las imágenes capturadas para mejorar el reconocimiento de texto.
+- Reconocimiento de escritura a mano utilizando Tesseract OCR.
+- Conversión de texto a voz utilizando pyttsx3.
 
-## Requirements
+## Requisitos
 
-### Hardware
-- A computer with a webcam for real-time handwriting capture.
+### Requisitos de Hardware
+- Un computador con cámara web para la captura de imágenes en tiempo real.
+- Opcional: Micrófono y altavoces para la interacción por voz.
 
-### Software
-- Python 3.8 or higher
-- Virtual environment for dependency management
+### Requisitos de Software
 
-## Installation
+- Python 3.8 o superior
+- Dependencias listadas en `requirements.txt`
 
-Follow these steps to set up the project on your local machine.
+### Dependencias de Python
+- `opencv-python` (para capturar imágenes desde la cámara web)
+- `pytesseract` (para el reconocimiento de texto utilizando Tesseract OCR)
+- `pyttsx3` (para convertir el texto reconocido en voz)
 
-### 1. Clone the repository
-First, clone the repository from GitHub to your local machine:
+### Instrucciones de Instalación
+
+Sigue estas instrucciones para configurar el proyecto en tu máquina local.
+
+#### 1. Clonar el repositorio
+Primero, clona el repositorio desde GitHub a tu máquina local:
 ```bash
-git clone https://github.com/r4skolnikov/proyectoPDI.git
-cd proyectoPDI
+git clone https://github.com/tuusuario/handwriting_recognition_project.git
+cd handwriting_recognition_project
 ```
 
-### 2. Set up a virtual environment
-It's important to use a virtual environment to manage the project dependencies and avoid conflicts with other Python projects.
+#### 2. Configurar un entorno virtual
+Se recomienda utilizar un entorno virtual para gestionar las dependencias y evitar conflictos con otros proyectos de Python.
 
-#### Linux (Arch Linux or similar)
-1. Install `python-virtualenv` if you don't have it:
+##### En Linux/macOS:
+1. Crea un entorno virtual:
    ```bash
-   sudo pacman -S python-virtualenv
+   python3 -m venv venv
    ```
 
-2. Create a virtual environment in the project directory:
-   ```bash
-   virtualenv venv
-   ```
-
-3. Activate the virtual environment:
+2. Activa el entorno virtual:
    ```bash
    source venv/bin/activate
    ```
 
-#### Other OS (Optional)
-- On Windows:
+##### En Windows:
+1. Crea un entorno virtual:
+   ```bash
+   python -m venv venv
+   ```
+
+2. Activa el entorno virtual:
    ```bash
    venv\Scripts\activate
    ```
-- On macOS:
-   ```bash
-   source venv/bin/activate
-   ```
 
-### 3. Install dependencies
-Once the virtual environment is activated, install the project dependencies using `pip`:
+#### 3. Instalar las dependencias del proyecto
+Una vez que el entorno virtual esté activado, instala las dependencias listadas en `requirements.txt`:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-This will install all necessary libraries, such as:
-- `opencv-python`
-- `numpy`
-- `tensorflow` or `torch` (depending on the model implementation)
-- `gTTS` for text-to-speech conversion
+#### 4. Instalar Tesseract OCR
+Es necesario tener instalado Tesseract OCR en tu sistema.
 
-### 4. Set up your webcam
-Make sure that your computer’s webcam is working. You can test it by running a small OpenCV script.
+- **Linux (distribuciones basadas en Arch)**:
+  ```bash
+  sudo pacman -S tesseract tesseract-data-eng
+  ```
 
-If the webcam is working correctly, you should see a live video feed from your camera.
+- **Ubuntu/Debian**:
+  ```bash
+  sudo apt install tesseract-ocr
+  ```
 
-## Project Structure
+- **Windows**:
+  Descarga e instala Tesseract OCR desde [aquí](https://github.com/UB-Mannheim/tesseract/wiki).
+  Después de la instalación, asegúrate de agregar la ruta de `tesseract.exe` a las variables de entorno.
 
-```
-handwriting_recognition_project/
-│
-├── data/                    # Directory for storing images/videos
-│   ├── raw/                 # Unprocessed images/videos
-│   └── processed/           # Preprocessed images/videos
-│
-├── src/                     # Source code for the project
-│   ├── capture.py           # Webcam capture code
-│   ├── preprocess.py        # Image preprocessing functions
-│   ├── recognition.py       # Handwriting recognition code
-│   ├── text_to_speech.py    # Text-to-speech conversion code
-│   └── main.py              # Main script to run the project
-│
-├── tests/                   # Unit tests
-├── notebooks/               # Jupyter notebooks for experimentation
-├── .gitignore               # Git ignore file to avoid unnecessary files
-├── README.md                # Project documentation (this file)
-└── requirements.txt         # Project dependencies
-```
-
-## Running the Project
-
-### 1. Running the project
-Once everything is set up, you can run the project using the `main.py` script. This script will orchestrate the entire workflow: capturing the image, processing it, recognizing the text, and converting it to speech.
-
-Make sure the virtual environment is activated, and run the following command:
+#### 5. Ejecutar el proyecto
+Una vez que todo esté configurado, puedes ejecutar el proyecto utilizando el script principal:
 
 ```bash
 python src/main.py
 ```
 
-### 2. Expected Behavior
-- The webcam will open, and the system will capture a frame of handwritten text.
-- The image will be preprocessed (converted to grayscale, binarized, etc.).
-- The text in the image will be recognized using the neural network.
-- The recognized text will be converted to speech, and you should hear the output through your speakers.
+El sistema comenzará a capturar video desde la cámara web, reconocer el texto escrito a mano y convertirlo en voz.
 
-## Customization
+### Estructura del Proyecto
 
-- **Modify the model:** You can modify the neural network model in the `models/handwriting_model.py` file if you want to experiment with different architectures.
-- **Tuning preprocessing steps:** If you need to adjust the image preprocessing steps (e.g., noise reduction, binarization), you can edit `src/preprocess.py`.
-
-## Running Tests
-
-Unit tests are located in the `tests/` directory. To run the tests, use:
-
-```bash
-python -m unittest discover tests
+```
+handwriting_recognition_project/
+│
+├── data/                    # Directorio para almacenar imágenes/videos
+│   ├── raw/                 # Imágenes/videos sin procesar
+│   └── processed/           # Imágenes/videos procesados
+│
+├── src/                     # Código fuente del proyecto
+│   ├── capture.py           # Código para captura de imágenes desde la cámara web
+│   ├── preprocess.py        # Funciones de preprocesamiento de imágenes
+│   ├── recognition.py       # Código de reconocimiento de escritura a mano (Tesseract)
+│   ├── text_to_speech.py    # Conversión de texto a voz
+│   └── main.py              # Script principal para ejecutar el proyecto
+│
+├── tests/                   # Pruebas unitarias para todos los módulos
+│   ├── test_capture.py      # Pruebas para el módulo de captura
+│   ├── test_preprocess.py   # Pruebas para el módulo de preprocesamiento
+│   ├── test_recognition.py  # Pruebas para el módulo de reconocimiento
+│   └── test_text_to_speech.py # Pruebas para el módulo de conversión de texto a voz
+│
+├── .gitignore               # Archivo gitignore
+├── README.md                # Documentación (este archivo)
+└── requirements.txt         # Dependencias del proyecto
 ```
 
-This will run all unit tests to ensure that the preprocessing, recognition, and text-to-speech functionalities are working as expected.
+## Ejecutar Pruebas
 
-## Known Issues
+Las pruebas unitarias para los módulos están ubicadas en el directorio `tests/`. Puedes ejecutar las pruebas utilizando `pytest`:
 
-- The system might struggle with poor-quality handwriting or images with low resolution.
-- GPU support is recommended for faster neural network inference.
+```bash
+pytest
+```
 
-## Future Enhancements
+### Cómo ejecutar las pruebas
+1. Asegúrate de tener pytest instalado en tu entorno virtual:
+   ```bash
+   pip install pytest
+   ```
 
-- Improve model accuracy by training with a larger dataset of handwriting samples.
-- Add more advanced text-to-speech options.
-- Implement more robust error handling for cases where the text cannot be recognized.
+2. Ejecuta todas las pruebas:
+   ```bash
+   pytest
+   ```
 
-## License
+Esto ejecutará todas las pruebas unitarias para verificar que los módulos de captura, preprocesamiento, reconocimiento y conversión de texto a voz funcionen correctamente.
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+## Problemas Conocidos
+
+- El sistema puede tener dificultades en entornos con poca luz o con escritura de baja calidad.
+- Se recomienda la aceleración por GPU para un reconocimiento de texto más rápido, aunque no es obligatoria.
+- En grandes cantidades de texto, puede haber un retraso en la conversión de texto a voz.
+
+## Mejoras Futuras
+
+- Mejorar la precisión del modelo entrenando con un conjunto de datos más grande de muestras de escritura a mano.
+- Mejorar la conversión de texto a voz con opciones más avanzadas.
+- Implementar un manejo de errores más avanzado para casos donde no se puede reconocer el texto.
+
+## Licencia
+
+Este proyecto está bajo la licencia MIT - consulta el archivo [LICENSE](LICENSE) para más detalles.
