@@ -13,7 +13,6 @@ This project aims to recognize handwritten text using neural networks and conver
 
 ### Hardware
 - A computer with a webcam for real-time handwriting capture.
-- **Optional but recommended**: A GPU to accelerate neural network training and inference.
 
 ### Software
 - Python 3.8 or higher
@@ -26,8 +25,8 @@ Follow these steps to set up the project on your local machine.
 ### 1. Clone the repository
 First, clone the repository from GitHub to your local machine:
 ```bash
-git clone https://github.com/yourusername/handwriting_recognition_project.git
-cd handwriting_recognition_project
+git clone https://github.com/r4skolnikov/proyectoPDI.git
+cd proyectoPDI
 ```
 
 ### 2. Set up a virtual environment
@@ -73,11 +72,7 @@ This will install all necessary libraries, such as:
 - `gTTS` for text-to-speech conversion
 
 ### 4. Set up your webcam
-Make sure that your computer’s webcam is working. You can test it by running a small OpenCV script, which is included in the project, to ensure that the webcam is detected and functioning properly.
-
-```bash
-python src/capture.py
-```
+Make sure that your computer’s webcam is working. You can test it by running a small OpenCV script.
 
 If the webcam is working correctly, you should see a live video feed from your camera.
 
