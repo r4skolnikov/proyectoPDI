@@ -1,13 +1,29 @@
-*.tar
-*.tar.*
-*.jar
-*.exe
-*.msi
-*.zip
-*.tgz
-*.log
-*.log.*
-*.sig
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.python-version
 
-pkg/
-src/
+# Entorno virtual
+venv/
+.env
+.venv/
+
+# Configuración de IDE/Editor
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de log o debug
+*.log
+
+# Archivos de salida de pruebas
+.pytest_cache/
+coverage/
+.coverage
