@@ -85,9 +85,6 @@ handwriting_recognition_project/
 │   ├── raw/                 # Unprocessed images/videos
 │   └── processed/           # Preprocessed images/videos
 │
-├── models/                  # Neural network models
-│   └── handwriting_model.py # Handwriting recognition model
-│
 ├── src/                     # Source code for the project
 │   ├── capture.py           # Webcam capture code
 │   ├── preprocess.py        # Image preprocessing functions
