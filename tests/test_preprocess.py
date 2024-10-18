@@ -17,7 +17,7 @@ class TestPreprocessImage(unittest.TestCase):
         _, expected_output = cv2.threshold(expected_output, 150, 255, cv2.THRESH_BINARY)
         
         # Verificar si las imagenes son iguales
-        np.testing.assert_array_equal(processed_image, expected_output, err_msg="Error en test_small_preprocess_image: Las imágenes procesadas no coinciden.")
+        np.testing.assert_array_equal(processed_image, expected_output, err_msg="Error, las imágenes procesadas no coinciden.")
 
     def test_preprocess_big__image(self):
         # Crear una imagen de prueba en color (BGR)
@@ -31,7 +31,7 @@ class TestPreprocessImage(unittest.TestCase):
         _, expected_output = cv2.threshold(expected_output, 150, 255, cv2.THRESH_BINARY)
         
         # Verificar si las imagenes son iguales
-        np.testing.assert_array_equal(processed_image, expected_output, err_msg="Error en test_small_preprocess_image: Las imágenes procesadas no coinciden.")
+        np.testing.assert_array_equal(processed_image, expected_output, err_msg="Error, las imágenes procesadas no coinciden.")
 
 if __name__ == '__main__':
     unittest.main()
