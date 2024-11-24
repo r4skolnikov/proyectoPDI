@@ -27,3 +27,10 @@ Thumbs.db
 .pytest_cache/
 coverage/
 .coverage
+
+# Archivos pdf generados
+*.pdf
+
+# Archivos de métricas
+*.csv
+*.png

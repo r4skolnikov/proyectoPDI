@@ -2,7 +2,10 @@
 
 import pyttsx3
 
-def text_to_speech(text):
+tts_engine = pyttsx3.init()
+tts_engine.setProperty("rate", 150)
+
+def speak_text(text):
     """
     Convierte texto a voz en tiempo real utilizando pyttsx3.
     """

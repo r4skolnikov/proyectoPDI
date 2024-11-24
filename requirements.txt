@@ -1,0 +1,8 @@
+argparse
+easyocr
+pyttsx3
+torch
+opencv-python
+reportlab
+matplotlib
+pandas
