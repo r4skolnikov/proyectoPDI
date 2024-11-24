@@ -2,12 +2,24 @@
 
 # src/recognition.py
 
-import pytesseract
+import easyocr
+from gpu_manager import check_gpu
 
-def recognize_text(image):
+def ocr_with_easyocr(image_path, use_gpu=None):
     """
-    Reconoce el texto en una imagen preprocesada utilizando Tesseract OCR.
-    Retorna el texto reconocido.
+    Reconocimiento de texto usando EasyOCR con soporte GPU.
     """
-    text = pytesseract.image_to_string(image)
+    if use_gpu is None:
+        use_gpu = check_gpu()
+
+    reader = easyocr.Reader(['en'], gpu=use_gpu)
+    results = reader.readtext(image_path, detail=0)
+    return ' '.join(results)
+
+
+
+def recognize_text(image_path):
+    text = ocr_with_easyocr(image_path)
     return text
+
+

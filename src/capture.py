@@ -2,7 +2,7 @@
 
 import cv2
 
-def capture_image():
+def capture_image_from_camera():
     """
     Captura imágenes desde la cámara web en tiempo real.
     Retorna el fotograma capturado.
