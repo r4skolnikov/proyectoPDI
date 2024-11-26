@@ -11,7 +11,7 @@ from pdf_generator import generate_pdf
 # Inicializa el recolector de métricas
 metrics_collector = MetricsCollector()
 
-def handle_blind_mode():
+def handle_blind_mode(args):
     """
     Modo interactivo para personas ciegas.
     Utiliza TTS para guiar y las teclas 'f' y 'j' para interacciones básicas.
@@ -29,8 +29,9 @@ def handle_blind_mode():
 
             speak_text("Capturando imagen en 3... 2... 1...")
             image_path = capture_image()  
-            if not image_path:
+            if image_path is None:
                 speak_text("No se pudo capturar la imagen. Intenta de nuevo.")
+                print("No se capturo imagen")
                 continue
 
             speak_text("Puede retirar el texto de la cámara.")
@@ -40,17 +41,30 @@ def handle_blind_mode():
             processed_image = preprocess_image(image_path)  
 
             speak_text("Reconociendo texto...")
-            text = recognize_text(processed_image)  
-            if text:
+            result = recognize_text(processed_image) 
+            
+            if result:
+                text = ""
+                cont = 0
+                for (bbox, texto, prob) in result:
+                    print(texto)
+                    print(prob)
+                    text = text + texto
+                    if args.metrics:
+                        metrics_collector.add_metric(cont, prob)
+                        metrics_collector.save_metrics_to_csv()
+                    cont +=1
+                print(text)
                 speak_text(f"El texto reconocido es: {text}")
+                #metrics_collector.plot_metrics()
+                    
             else:
                 speak_text("No se detectó texto en la imagen.")
-
+            
+            
         elif command == 'j':
-            quit_sequence += 'j'
-            if quit_sequence == 'jjj':
-                speak_text("Saliendo del programa. Hasta luego.")
-                break
+            speak_text("Saliendo del programa. Hasta luego.")
+            break
         else:
             quit_sequence = "" 
             speak_text("Comando no reconocido. Intenta de nuevo.")
@@ -69,7 +83,17 @@ def handle_normal_mode(args):
         processed_image = preprocess_image(args.image)
 
         print("Reconociendo texto...")
-        text = recognize_text(processed_image)
+        resultado = recognize_text(processed_image)
+        text = ""
+        cont = 0
+        for (bbox, texto, prob) in resultado:
+            print(texto)
+            print(prob)
+            text = text + texto
+            if args.metrics:
+                metrics_collector.add_metric(cont, prob)
+            cont +=1
+    
         print("Texto reconocido:")
         print(text)
 
@@ -83,7 +107,7 @@ def handle_normal_mode(args):
 
     if args.metrics:
         metrics_collector.save_metrics_to_csv()
-        metrics_collector.plot_metrics()
+        #metrics_collector.plot_metrics()
 
 
 def explain_blind_mode():
@@ -93,7 +117,7 @@ def explain_blind_mode():
     speak_text("Bienvenido al modo para personas ciegas.")
     speak_text("Este programa te permitirá capturar texto manuscrito y escuchar el resultado.")
     speak_text("Presiona la tecla 'f' para capturar una imagen. A continuación, te indicaremos cuándo acercar el texto a la cámara y cuándo retirarlo.")
-    speak_text("Para salir del programa, presiona tres veces consecutivas la tecla 'j'.")
+    speak_text("Para salir del programa, presiona la tecla 'j'.")
     speak_text("¡Comencemos!")
 
 
@@ -143,16 +167,11 @@ Este programa tiene dos modos principales:
         action="store_true",
         help="Genera métricas y gráficos de rendimiento del OCR. (Solo para modo CLI)."
     )
-    parser.add_argument(
-        "--help",
-        action="help",
-        help="Muestra esta ayuda y termina el programa."
-    )
 
     args = parser.parse_args()
 
     if args.blind:
-        handle_blind_mode()
+        handle_blind_mode(args)
     else:
         handle_normal_mode(args)
 

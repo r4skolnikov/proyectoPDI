@@ -12,9 +12,10 @@ def ocr_with_easyocr(image_path, use_gpu=None):
     if use_gpu is None:
         use_gpu = check_gpu()
 
-    reader = easyocr.Reader(['en'], gpu=use_gpu)
-    results = reader.readtext(image_path, detail=0)
-    return ' '.join(results)
+    reader = easyocr.Reader(['en','es'], gpu=use_gpu)
+    results = reader.readtext(image_path)
+    print(results)
+    return results
 
 
 

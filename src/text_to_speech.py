@@ -2,8 +2,8 @@
 
 import pyttsx3
 
-tts_engine = pyttsx3.init()
-tts_engine.setProperty("rate", 150)
+#tts_engine = pyttsx3.init()
+#tts_engine.setProperty("rate", 150)
 
 def speak_text(text):
     """
