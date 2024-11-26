@@ -47,8 +47,6 @@ def handle_blind_mode(args):
                 text = ""
                 cont = 0
                 for (bbox, texto, prob) in result:
-                    print(texto)
-                    print(prob)
                     text = text + texto
                     if args.metrics:
                         metrics_collector.add_metric(cont, prob)

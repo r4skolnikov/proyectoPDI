@@ -14,7 +14,6 @@ def ocr_with_easyocr(image_path, use_gpu=None):
 
     reader = easyocr.Reader(['en','es'], gpu=use_gpu)
     results = reader.readtext(image_path)
-    print(results)
     return results
 
 
